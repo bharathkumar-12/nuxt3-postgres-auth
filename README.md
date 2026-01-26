@@ -1,79 +1,156 @@
-# Nuxt.js Project with PostgreSQL Integration
+# Nuxt 3 User Management App
 
-## Overview
-This project is a **Nuxt.js application** that integrates with a **PostgreSQL database**. It demonstrates basic CRUD operations, user authentication, and how to containerize the project using Docker.
+A full-stack user management application built with Nuxt 3, PostgreSQL, and Docker. Features user authentication, CRUD operations, and JWT-based authorization.
 
-## Table of Contents
-- [Requirements](#requirements)
-- [Setup](#setup)
-- [Docker Image Creation](#docker-image-creation)
-- [Running the Docker Container](#running-the-docker-container)
-- [Interacting with the Application](#interacting-with-the-application)
-- [Environment Variables](#environment-variables)
-- [Helpful Notes](#helpful-notes)
+## ✨ Features
 
-## Requirements
-- **Docker** and **Docker Compose** installed on your system.
-- **Node.js** and **npm** (for local development).
+- 🔐 **User Authentication** - Login and registration with JWT tokens
+- 👥 **User Management** - Complete CRUD operations for user accounts
+- 🐳 **Docker Support** - Containerized application with PostgreSQL
+- 🎨 **Tailwind CSS** - Modern, responsive UI styling
+- 📦 **Pinia State Management** - Centralized user state management
+- 🔔 **Toast Notifications** - User feedback with Vue3 Toastify
+- 🛡️ **Protected Routes** - Middleware-based authentication guards
 
-## Setup
-1. **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd <project-folder>
-    ```
-2. **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3. **Start the development server:**
-    ```bash
-    npm run dev
-    ```
+## 🚀 Tech Stack
 
-## Docker Image Creation
+- **Frontend**: Nuxt 3, Vue 3, Tailwind CSS
+- **Backend**: Nuxt Server API Routes
+- **Database**: PostgreSQL
+- **Authentication**: JWT (jsonwebtoken)
+- **State Management**: Pinia
+- **Containerization**: Docker & Docker Compose
 
-### Step 1: Build Docker Image
-To build a Docker image for the Nuxt.js application:
+## 📋 Prerequisites
+
+- Node.js 18+ or Docker
+- PostgreSQL (if running locally without Docker)
+
+## 🛠️ Installation
+
+### Using Docker (Recommended)
+
+1. Clone the repository:
+
 ```bash
-docker build -t <image_name>:<tag> .
+git clone <repository-url>
+cd nuxt-latest/task
+```
 
+2. Start the application with Docker Compose:
 
-Running the Docker Container
+```bash
+docker-compose up -d
+```
 
-Step 1: Start the PostgreSQL Container
-If not already running, start a PostgreSQL container:
-docker run -d --name postgres_container \
-  -e POSTGRES_USER=myuser \
-  -e POSTGRES_PASSWORD=mysecretpassword \
-  -e POSTGRES_DB=mydatabase \
-  -p 5432:5432 \
-  postgres
+3. Access the application at `http://localhost:3000`
 
-Step 2: Start the Nuxt.js Container
-To start the Nuxt.js container:
-docker run -d --name nuxt_app_container \
-  -p 3000:3000 \
-  --link postgres_container:postgres \
-  -e DB_HOST=postgres \
-  -e DB_USER=myuser \
-  -e DB_PASSWORD=mysecretpassword \
-  -e DB_NAME=mydatabase \
-  <image_name>:<tag>
+### Local Development
 
-Step 3: Access the Application
-Once the containers are running, you can access the application at:
-http://localhost:3000
-Interacting with the Application
-Endpoints
-GET /api/users: Retrieve all users.
-GET /api/users?id=<user_id>: Retrieve a single user by ID.
-POST /api/users: Create a new user. Requires name, email, and password.
-PUT /api/users?id=<user_id>: Update an existing user by ID.
-DELETE /api/users?id=<user_id>: Delete a user by ID.
-POST /api/auth/login: User login.
-POST /api/auth/register: User registration.
+1. Install dependencies:
 
+```bash
+npm install
+```
 
+2. Set up PostgreSQL database and configure environment variables:
 
+```bash
+# Create a .env file
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=myuser
+DB_PASSWORD=mysecretpassword
+DB_NAME=mydatabase
+JWT_SECRET=your_jwt_secret
+```
 
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open `http://localhost:3000` in your browser
+
+## 📁 Project Structure
+
+```
+task/
+├── assets/css/          # Global styles
+├── components/          # Vue components
+│   └── UserForm.vue    # User CRUD form
+├── middleware/          # Route middleware
+│   └── auth.js         # Authentication guard
+├── pages/              # Application pages
+│   ├── index.vue       # Home page
+│   ├── login.vue       # Login page
+│   └── register.vue    # Registration page
+├── plugins/            # Nuxt plugins
+│   └── vue3-toastify.ts
+├── server/             # Server API routes
+│   └── api/
+│       ├── users.js    # User CRUD endpoints
+│       └── auth/
+│           ├── login.js     # Login endpoint
+│           └── register.js  # Registration endpoint
+├── stores/             # Pinia stores
+│   └── user.js        # User state management
+├── docker-compose.yml  # Docker configuration
+└── Dockerfile         # Container definition
+```
+
+## 🔌 API Endpoints
+
+### Authentication
+
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - User login
+
+### Users
+
+- `GET /api/users` - Get all users
+- `GET /api/users?id={id}` - Get user by ID
+- `POST /api/users` - Create new user
+- `PUT /api/users?id={id}` - Update user
+- `DELETE /api/users?id={id}` - Delete user
+
+## 🔐 Authentication Flow
+
+1. Users register or login through the UI
+2. Server validates credentials and issues a JWT token
+3. Token is stored in cookies and used for subsequent requests
+4. Protected routes check for valid token via middleware
+5. Expired tokens redirect users to login page
+
+## 🐳 Docker Setup
+
+The application uses Docker Compose to orchestrate:
+
+- **nuxt-app**: The Nuxt 3 application container
+- **postgres**: PostgreSQL database container
+
+Both containers run on a shared network for seamless communication.
+
+## 📝 Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run generate     # Generate static site
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Built with [Nuxt 3](https://nuxt.com/)
+- UI styled with [Tailwind CSS](https://tailwindcss.com/)
+- Database powered by [PostgreSQL](https://www.postgresql.org/)
