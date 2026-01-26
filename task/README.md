@@ -31,12 +31,14 @@ A full-stack user management application built with Nuxt 3, PostgreSQL, and Dock
 ### Using Docker (Recommended)
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd nuxt-latest/task
 ```
 
 2. Start the application with Docker Compose:
+
 ```bash
 docker-compose up -d
 ```
@@ -46,11 +48,13 @@ docker-compose up -d
 ### Local Development
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Set up PostgreSQL database and configure environment variables:
+
 ```bash
 # Create a .env file
 DB_HOST=localhost
@@ -62,6 +66,7 @@ JWT_SECRET=your_jwt_secret
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -98,10 +103,12 @@ task/
 ## 🔌 API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - User login
 
 ### Users
+
 - `GET /api/users` - Get all users
 - `GET /api/users?id={id}` - Get user by ID
 - `POST /api/users` - Create new user
@@ -119,6 +126,7 @@ task/
 ## 🐳 Docker Setup
 
 The application uses Docker Compose to orchestrate:
+
 - **nuxt-app**: The Nuxt 3 application container
 - **postgres**: PostgreSQL database container
 
