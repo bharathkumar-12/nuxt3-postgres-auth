@@ -154,3 +154,9 @@ This project is open source and available under the [MIT License](LICENSE).
 - Built with [Nuxt 3](https://nuxt.com/)
 - UI styled with [Tailwind CSS](https://tailwindcss.com/)
 - Database powered by [PostgreSQL](https://www.postgresql.org/)
+
+---
+
+## Maintenance
+
+Last maintenance update: <!--LAST_UPDATED-->2026-05-19<!--/LAST_UPDATED-->
